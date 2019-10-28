@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, ToastAndroid } from 'react-native';
+import { ToastAndroid, ActivityIndicator } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
-
-import Background from '../../assets/background.jpg'; 
-import Logo from '../../assets/r6.png';
 
 import { 
     Container, 
@@ -17,10 +14,16 @@ import {
     ButtonText 
 } from './styles';
 
+import Background from '../../assets/background.jpg'; 
+import Logo from '../../assets/r6.png';
+
 export default function Login({ navigation }) {
 
     const [userName, setUserName] = useState('');
-    const [userPlatform, setUserPlatform] = useState('uplay');    
+    const [userPlatform, setUserPlatform] = useState('uplay'); 
+    
+    const [activityColor, setAcativityColor] = useState('transparent');
+    const [buttonTextColor, setButtonTextColor] = useState('white');
 
     useEffect(() => {
         AsyncStorage.getItem('userId').then(user_id => {
@@ -33,6 +36,9 @@ export default function Login({ navigation }) {
     function handleSubmit(userName, userPlatform) {        
         if(userName !== '') {
 
+            setAcativityColor('white');
+            setButtonTextColor('transparent');
+
             let url = `https://r6tab.com/api/search.php?platform=${userPlatform}&search=${userName}`;
 
             fetch(url, {
@@ -40,8 +46,7 @@ export default function Login({ navigation }) {
             })
             .then((response) => response.json())
             .then(async (responseJson) => {
-                
-                console.log(responseJson); 
+                                
                 const { totalresults } = responseJson;
 
                 if(totalresults > 0) {
@@ -50,8 +55,16 @@ export default function Login({ navigation }) {
 
                     await AsyncStorage.setItem('userId', loggedId);                                  
                     navigation.navigate('Main');
+
+                    setAcativityColor('transparent');
+                    setButtonTextColor('white');
+
                 }else {
                     ToastAndroid.show('Usuário não encontrado', ToastAndroid.SHORT);
+
+                    setAcativityColor('transparent');
+                    setButtonTextColor('white');
+
                 }      
             })
             .catch((error) => {
@@ -72,8 +85,7 @@ export default function Login({ navigation }) {
                 <Label>Usuário</Label>
                 <Input
                     placeholder="SEU NICKNAME!"
-                    placeholderTextColor="#ddd"
-                    keyboardType="email-address"
+                    placeholderTextColor="#ddd"                    
                     autoCapitalize="none"
                     autoCorrect={false}
                     value={userName}
@@ -93,7 +105,8 @@ export default function Login({ navigation }) {
             </FormContainer>
 
             <Button onPress={() => handleSubmit(userName, userPlatform)}>
-                <ButtonText>ENTRAR</ButtonText>
+                <ButtonText style={{ color: `${buttonTextColor}`}}>ENTRAR</ButtonText>
+                <ActivityIndicator style={{ position: 'absolute', display: 'none'}} size="large" color={activityColor} />
             </Button>
 
         </Container>

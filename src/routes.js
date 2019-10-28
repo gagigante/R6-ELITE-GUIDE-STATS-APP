@@ -1,14 +1,115 @@
+import React from 'react';
+import { Platform } from "react-native";
+
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import createAnimatedSwitchNavigator from 'react-navigation-animated-switch';
+import { Transition } from 'react-native-reanimated';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import Login from './pages/Login';
 import Main from './pages/Main';
-//import Book from './pages/Book';
+import Seasons from './pages/Seasons';
+import Operators from './pages/Operators';
+import Leaderboard from './pages/Leaderboard';
 
-const Routes = createAppContainer(
-    createSwitchNavigator({
-        Login,
-        Main        
-    })
+import Icon from 'react-native-vector-icons/MaterialIcons';
+Icon.loadFont();
+
+// const Routes = createAnimatedSwitchNavigator(
+//     {
+//         Login,
+//         Main        
+//     },
+//     {
+//         transition: (
+//             <Transition.Together>
+//               <Transition.Out
+//                 type="slide-top"
+//                 durationMs={300}
+//                 interpolation="linear"
+//               />
+//               <Transition.In type="fade" durationMs={400} />
+//             </Transition.Together>
+//         ),
+// });
+
+// const MainTabs = createBottomTabNavigator({ 
+//     Login, 
+//     Main
+// });
+
+const MainTabNavigator = createBottomTabNavigator(
+    { 
+        Main: { 
+            screen: Main,
+            navigationOptions: () => ({
+                tabBarIcon: ({ focused }) => (
+                <Icon name="3d-rotation" size={20} color={focused ? '#0edee8' : '#ddd'} />
+                ),
+            tabBarLabel: 'Stats',
+            }),
+        },  
+        
+        Seasons: { 
+            screen: Seasons,
+            navigationOptions: () => ({
+                tabBarIcon: ({ focused }) => (
+                <Icon name="3d-rotation" size={20} color={focused ? '#0edee8' : '#ddd'} />
+                ),
+            tabBarLabel: 'Seasonal',
+            }),
+        },  
+        Operators: { 
+            screen: Operators,
+            navigationOptions: () => ({
+                tabBarIcon: ({ focused }) => (
+                <Icon name="3d-rotation" size={20} color={focused ? '#0edee8' : '#ddd'} />
+                ),
+            tabBarLabel: 'Operators',
+            }),
+        },
+        Leaderboard: { 
+            screen: Leaderboard,
+            navigationOptions: () => ({
+                tabBarIcon: ({ focused }) => (
+                <Icon name="3d-rotation" size={20} color={focused ? '#0edee8' : '#ddd'} />
+                ),
+            tabBarLabel: 'Leaderboard',
+            }),
+        },  
+    },{
+        initialRouteName: 'Main',
+        tabBarOptions: {
+            activeTintColor: '#0edee8',
+            labelStyle: {
+              fontSize: 12,
+            },
+            style: {
+              backgroundColor: '#161f2e',
+              borderBottomWidth: 0,
+            },
+          },          
+          
+      }
 );
 
-export default Routes;
+const Routes = createAnimatedSwitchNavigator(
+    { 
+        Login, 
+        MainTabNavigator 
+    },    
+    {
+        transition: (
+            <Transition.Together>
+                {/* <Transition.Out
+                type="fade"
+                durationMs={300}
+                interpolation="linear"
+                /> */}
+                <Transition.In type="fade" durationMs={400} />
+            </Transition.Together>
+        ),
+    }
+);
+
+export default createAppContainer(Routes);
