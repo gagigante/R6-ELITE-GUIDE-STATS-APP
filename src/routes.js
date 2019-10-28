@@ -15,29 +15,6 @@ import Leaderboard from './pages/Leaderboard';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 Icon.loadFont();
 
-// const Routes = createAnimatedSwitchNavigator(
-//     {
-//         Login,
-//         Main        
-//     },
-//     {
-//         transition: (
-//             <Transition.Together>
-//               <Transition.Out
-//                 type="slide-top"
-//                 durationMs={300}
-//                 interpolation="linear"
-//               />
-//               <Transition.In type="fade" durationMs={400} />
-//             </Transition.Together>
-//         ),
-// });
-
-// const MainTabs = createBottomTabNavigator({ 
-//     Login, 
-//     Main
-// });
-
 const MainTabNavigator = createBottomTabNavigator(
     { 
         Main: { 

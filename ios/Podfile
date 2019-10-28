@@ -42,6 +42,8 @@ target 'r6app' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
   target 'r6appTests' do
     inherit! :search_paths
     # Pods for testing

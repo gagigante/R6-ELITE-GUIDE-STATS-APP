@@ -1,53 +1,52 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, View, Text, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+
+import { Alert, View, Text, TouchableOpacity } from 'react-native';
 
 import { 
   Container, 
-  LogoImage,
-  HeaderView,
-  Avatar,
-  HeaderStatsView,
-  NameText,
-  StatsView,
-  InfoText,
-  GreyText
+  LogoImage, 
+  LogoutButton,
 } from './styles';
+
+import Icon from 'react-native-vector-icons/MaterialIcons';
+Icon.loadFont();
+
+import HeaderStats from '../../components/HeaderStats';
 
 import Background from '../../assets/main-background.jpg'; 
 import Logo from '../../assets/r6.png';
 
-
 export default function Main({ navigation }) {
   
   const [loggedUserData, setLoggedUserData] = useState([]);
+  const [shimmerVisible, setShimmerVisible] = useState(false);
 
   useEffect(() => {
+
     async function handleStats() {
 
       const userId = await AsyncStorage.getItem('userId');
 
-      
-
       let url = `https://r6tab.com/api/player.php?p_id=${userId}`;
 
-      fetch(url, {
+      await fetch(url, {
           method: 'GET'
       })
       .then((response) => response.json())
       .then(async (responseJson) => {          
           
-          setLoggedUserData(responseJson);     
-          console.log('entrou');      
-          console.log(responseJson.p_name);
+          setLoggedUserData(responseJson);               
           
       })
       .catch((error) => {
-          console.error(error);
-      });    
-    }
-
+          console.log(error);
+      });   
+      
+      setShimmerVisible(true);      
+    }           
     handleStats();
+   
   }, []);
 
   function handleExit() {
@@ -56,27 +55,17 @@ export default function Main({ navigation }) {
   }
 
   return (
-    <Container source={Background}>
 
-      <LogoImage source={Logo} />
+    <Container source={Background}>      
 
-      <HeaderView>
-        <Avatar source={Logo}/>
-        <HeaderStatsView>
-          <NameText>{loggedUserData.p_name}</NameText>
-          <StatsView>
-            <InfoText>#{loggedUserData.p_pvtrank} 
-              <GreyText> Global</GreyText></InfoText>
-            <InfoText>
-              <GreyText>Level</GreyText> {loggedUserData.p_level}</InfoText>
-            <InfoText><GreyText>KD</GreyText> {loggedUserData.kd/100}</InfoText>
-          </StatsView>
-        </HeaderStatsView>
-      </HeaderView>
-      <Text style={{ color: 'white' }}>{loggedUserData.p_pvtrank}</Text>
-      <TouchableOpacity onPress={() => handleExit()}> 
-        <Text>SAIR</Text> 
-      </TouchableOpacity>
+      <LogoutButton onPress={() => handleExit()}>
+        <Icon size={32} name="exit-to-app" color="#e63939" />
+      </LogoutButton>
+      <LogoImage source={Logo} />   
+
+      <HeaderStats stats={loggedUserData} shimmer={shimmerVisible} />
+
+      
     </Container>
   );
 }
