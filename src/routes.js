@@ -7,6 +7,7 @@ import { Transition } from 'react-native-reanimated';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import Login from './pages/Login';
+import LoginResults from './pages/LoginResults';
 import Main from './pages/Main';
 import Seasons from './pages/Seasons';
 import Operators from './pages/Operators';
@@ -73,6 +74,7 @@ const MainTabNavigator = createBottomTabNavigator(
 const Routes = createAnimatedSwitchNavigator(
     { 
         Login, 
+        LoginResults,
         MainTabNavigator 
     },    
     {

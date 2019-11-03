@@ -34,6 +34,7 @@ export default function Login({ navigation }) {
     }, []);
 
     function handleSubmit(userName, userPlatform) {        
+        
         if(userName !== '') {
 
             setAcativityColor('white');
@@ -49,15 +50,12 @@ export default function Login({ navigation }) {
                                 
                 const { totalresults } = responseJson;
 
-                if(totalresults > 0) {
-
-                    const loggedId = responseJson.results[0].p_id;                    
-
-                    await AsyncStorage.setItem('userId', loggedId);                                  
-                    navigation.navigate('Main');
+                if(totalresults > 0) {                                                 
 
                     setAcativityColor('transparent');
                     setButtonTextColor('white');
+
+                    navigation.navigate('LoginResults', {response: responseJson.results});                    
 
                 }else {
                     ToastAndroid.show('Usuário não encontrado', ToastAndroid.SHORT);
@@ -95,7 +93,7 @@ export default function Login({ navigation }) {
                 <Label>Plataforma</Label>
                 <Picker
                     selectedValue={userPlatform}
-                    onValueChange={(itemValue, itemIndex) => setUserPlatform(itemValue)}           
+                    onValueChange={(itemValue, itemIndex) => setUserPlatform(itemValue)}
                 >
                     <Picker.Item label="PC" value="uplay" />
                     <Picker.Item label="XBOX" value="xbl" />
@@ -106,7 +104,7 @@ export default function Login({ navigation }) {
 
             <Button onPress={() => handleSubmit(userName, userPlatform)}>
                 <ButtonText style={{ color: `${buttonTextColor}`}}>ENTRAR</ButtonText>
-                <ActivityIndicator style={{ position: 'absolute', display: 'none'}} size="large" color={activityColor} />
+                <ActivityIndicator style={{ position: 'absolute' }} size="large" color={activityColor} />
             </Button>
 
         </Container>

@@ -21,9 +21,9 @@ export default function HeaderStats({ stats, shimmer }) {
   const shimmerStatus = shimmer;
 
   const platformImages = {
-    'uplay' : require('../../assets/windows_logo.png'),
-    'xbl': require('../../assets/xbox_logo.png'),
-    'psn': require('../../assets/psn_logo.png')
+    'uplay' : require('../../assets/platforms/windows_logo.png'),
+    'xbl': require('../../assets/platforms/xbox_logo.png'),
+    'psn': require('../../assets/platforms/psn_logo.png')
   }
 
   return (

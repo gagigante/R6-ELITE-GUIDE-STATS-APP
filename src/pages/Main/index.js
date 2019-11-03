@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { Alert, View, Text, TouchableOpacity } from 'react-native';
 
 import { 
+  BackgroundContainer,
   Container, 
   LogoImage, 
   LogoutButton,
@@ -13,6 +14,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 Icon.loadFont();
 
 import HeaderStats from '../../components/HeaderStats';
+import RankStats from '../../components/RankStats';
+import MatchStats from '../../components/MatchStats';
 
 import Background from '../../assets/main-background.jpg'; 
 import Logo from '../../assets/r6.png';
@@ -34,7 +37,7 @@ export default function Main({ navigation }) {
           method: 'GET'
       })
       .then((response) => response.json())
-      .then(async (responseJson) => {          
+      .then((responseJson) => {          
           
           setLoggedUserData(responseJson);               
           
@@ -56,16 +59,26 @@ export default function Main({ navigation }) {
 
   return (
 
-    <Container source={Background}>      
+    <Container>      
+      <BackgroundContainer source={Background}>
 
-      <LogoutButton onPress={() => handleExit()}>
-        <Icon size={32} name="exit-to-app" color="#e63939" />
-      </LogoutButton>
-      <LogoImage source={Logo} />   
+        <LogoutButton onPress={() => handleExit()}>
+          <Icon size={32} name="exit-to-app" color="#e63939" />
+        </LogoutButton>
 
-      <HeaderStats stats={loggedUserData} shimmer={shimmerVisible} />
+        <LogoImage source={Logo} />   
 
-      
-    </Container>
+
+        <HeaderStats stats={loggedUserData} shimmer={shimmerVisible} />
+
+        {/* <RankStats stats={loggedUserData} /> */}
+
+        <MatchStats stats={loggedUserData.data} matchType="Casual" />
+        <MatchStats stats={loggedUserData.data} matchType="Ranked" />
+        <MatchStats stats={loggedUserData.data} matchType="Terrorist Hunt" />
+        <MatchStats stats={loggedUserData.data} matchType="Casual" />
+        
+        </BackgroundContainer>
+      </Container>
   );
 }
