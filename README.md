@@ -1,17 +1,17 @@
 <h1 align="center">
-    <img alt="Devradar" title="#Devradar" src=".github/devradar-logo.svg" width="250px" />
+    <img alt="Devradar" title="#R6" src=".github/app-logo.png" width="250px" />
 </h1>
 
 <h4 align="center">
-  Devradar
+  R6 Stats App
 </h4>
 <p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/gagigante/Omnistack10-Devradar">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/gagigante/R6-ELITE-GUIDE-STATS-APP">
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/gagigante/Omnistack10-Devradar">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/gagigante/R6-ELITE-GUIDE-STATS-APP">
   
   <a href="https://github.com/gagigante/Omnistack10-Devradar/commits/master">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/gagigante/Omnistack10-Devradar">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/gagigante/R6-ELITE-GUIDE-STATS-APP">
   </a>
 
   <a href="https://github.com/gagigante/Omnistack10-Devradar/issues">
@@ -35,12 +35,9 @@
 
 ## :rocket: Tecnologias
 
-Esse projeto foi desenvolvido com as seguintes tecnologias:
+This project was developed with the following technologies
 
-- [Node.js](https://nodejs.org/en/)
-- [React](https://reactjs.org)
 - [React Native](https://facebook.github.io/react-native/)
-- [Expo](https://expo.io/)
 
 ## 💻 Project
 
