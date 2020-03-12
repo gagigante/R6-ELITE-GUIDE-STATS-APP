@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img alt="Devradar" title="#R6" src=".github/logo.png" width="250px" />
+    <img alt="Devradar" title="#R6" src=".github/project-logo.png" width="250px" />
 </h1>
 
 <h4 align="center">
