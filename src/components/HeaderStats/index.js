@@ -17,13 +17,12 @@ import {
 } from './styles';
 
 export default function HeaderStats({stats, shimmer}) {
-
   const shimmerStatus = shimmer;
 
   const platformImages = {
     uplay: require('../../assets/platforms/windows_logo.png'),
     xbl: require('../../assets/platforms/xbox_logo.png'),
-    psn: require('../../assets/platforms/psn_logo.png'),,
+    psn: require('../../assets/platforms/psn_logo.png'),
   };
 
   // useEffect(() => {
@@ -68,10 +67,10 @@ export default function HeaderStats({stats, shimmer}) {
           <PlatformImage
             source={
               stats.p_platform == 'uplay'
-                ? platformImages['uplay']
+                ? platformImages.uplay
                 : stats.p_platform == 'psn'
-                ? platformImages['psn']
-                : platformImages['xbl']
+                ? platformImages.psn
+                : platformImages.xbl
             }
           />
         </TitleView>
@@ -103,7 +102,6 @@ const styles = StyleSheet.create({
   shimmerAvatar: {
     alignSelf: 'stretch',
     marginBottom: 10,
-    height: 30,
     width: Dimensions.get('window').width * 0.15,
     height: Dimensions.get('window').width * 0.15,
     marginRight: 10,
@@ -123,7 +121,6 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width * 0.65,
     height: 30,
     marginBottom: 5,
-
   },
 
   shimmerStats: {
@@ -131,4 +128,3 @@ const styles = StyleSheet.create({
     height: 20,
   },
 });
-
