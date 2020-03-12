@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import { Alert, View, Text, TouchableOpacity } from 'react-native';
+import {Alert, View, Text, TouchableOpacity} from 'react-native';
 
-import { 
+import {
   BackgroundContainer,
-  Container, 
-  LogoImage, 
+  Container,
+  LogoImage,
   LogoutButton,
 } from './styles';
 
@@ -18,43 +18,40 @@ import RankStats from '../../components/RankStats';
 import MatchStats from '../../components/MatchStats';
 import ModeStats from '../../components/ModeStats';
 
-import Background from '../../assets/main-background.jpg'; 
+import Background from '../../assets/main-background.jpg';
 import Logo from '../../assets/r6.png';
 
-export default function Main({ navigation }) {
-    
+export default function Main({navigation}) {
+
 
   const userData = navigation.getParam('response');
   const [loggedUserData, setLoggedUserData] = useState([]);
   const [shimmerVisible, setShimmerVisible] = useState(false);
 
   useEffect(() => {
-
     async function handleStats() {
-
       const userId = await AsyncStorage.getItem('userId');
 
       let url = `https://r6tab.com/api/player.php?p_id=${userId}`;
 
       await fetch(url, {
-          method: 'GET'
+        method: 'GET',,
       })
-      .then((response) => response.json())
-      .then(async (responseJson) => {          
-                            
-        setLoggedUserData(responseJson);                       
-      })
-      .catch((error) => {
-          console.log(error);
-      });   
+        .then(response => response.json())
+        .then(async responseJson => {
 
-      setShimmerVisible(true);             
-    }           
+        setLoggedUserData(responseJson);
+        .catch(error => {
+          console.log(error);
+        });
+
+      setShimmerVisible(true);
+    }
 
     handleStats();
 
     //console.log(userData);
-   
+
   }, []);
 
   function handleExit() {
@@ -63,15 +60,13 @@ export default function Main({ navigation }) {
   }
 
   return (
-
-    <Container>      
+    <Container>
       <BackgroundContainer source={Background}>
-
         <LogoutButton onPress={() => handleExit()}>
           <Icon size={32} name="exit-to-app" color="#e63939" />
         </LogoutButton>
 
-        <LogoImage source={Logo} />   
+        <LogoImage source={Logo} />
 
 
         <HeaderStats stats={loggedUserData} shimmer={shimmerVisible} />
@@ -83,8 +78,8 @@ export default function Main({ navigation }) {
         {/* <MatchStats stats={userData} matchType="Terrorist Hunt" /> */}
 
         <ModeStats />
-        
+
         </BackgroundContainer>
-      </Container>
+    </Container>
   );
 }

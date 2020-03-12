@@ -24,8 +24,7 @@ export default function LoginResults({navigation}) {
   var loggedUserData;
 
   async function handleSubmit(user_id) {
-
-        const loggedId = user_id;
+    const loggedId = user_id;
 
     //*****
     await AsyncStorage.setItem('userId', loggedId);
@@ -34,7 +33,7 @@ export default function LoginResults({navigation}) {
     let url = `https://r6tab.com/api/player.php?p_id=${loggedId}`;
 
     await fetch(url, {
-      method: 'GET',,
+      method: 'GET',
     })
       .then(response => response.json())
       .then(responseJson => {
@@ -54,7 +53,7 @@ export default function LoginResults({navigation}) {
   }
 
   return (
-<BackgroundContainer source={Background}>
+    <BackgroundContainer source={Background}>
       <LogoutButton onPress={() => handleExit()}>
         <Icon size={32} name="exit-to-app" color="#e63939" />
       </LogoutButton>

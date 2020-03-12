@@ -1,20 +1,19 @@
 import styled from 'styled-components/native';
-import { Dimensions } from "react-native";
+import {Dimensions} from 'react-native';
 
-const screenWidth = Dimensions.get("window").width;
-const screenHeight = Dimensions.get("window").height;
-
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
 
 export const HeaderView = styled.View`
-    padding: 0 30px;
-    flex-direction: row;    
+  padding: 0 30px;
+  flex-direction: row;
 `;
 
 export const Avatar = styled.Image`
-    width: ${screenWidth * 0.15}px;
-    height: ${screenWidth * 0.15}px;
-    margin-right: 10px;
-    margin-top: 5px;
+  width: ${screenWidth * 0.15}px;
+  height: ${screenWidth * 0.15}px;
+  margin-right: 10px;
+  margin-top: 5px;
 `;
 
 export const HeaderStatsView = styled.View`
@@ -25,34 +24,34 @@ export const HeaderStatsView = styled.View`
 `;
 
 export const TitleView = styled.View`
-    flex-direction: row;
-    align-items: center;    
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const NameText = styled.Text`
-    color: #fff;
-    font-size: 32px;
-    font-weight: bold;
-    margin-right: 5px;
+  color: #fff;
+  font-size: 32px;
+  font-weight: bold;
+  margin-right: 5px;
 `;
 
 export const PlatformImage = styled.Image`
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
 `;
 
 export const StatsView = styled.View`
-    flex-direction: row;
+  flex-direction: row;
 `;
 
 export const InfoText = styled.Text`
-    color: #fff;
-    margin-right: 5px;
-    padding-right: 5px;
-    border-right-width: 1px;
-    border-right-color: #363636;
+  color: #fff;
+  margin-right: 5px;
+  padding-right: 5px;
+  border-right-width: 1px;
+  border-right-color: #363636;
 `;
 
 export const GreyText = styled.Text`
-    color: #636363;
+  color: #636363;
 `;
