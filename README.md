@@ -21,10 +21,10 @@
   <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
 
 <p align="center">
-  <a href="#rocket-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-como-contribuir">Como contribuir</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#memo-licença">Licença</a>
+  <a href="#rocket-tecnologias">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-projeto">Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-como-contribuir">How to contribute</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#memo-licença">License</a>
 </p>
 
 <br>
@@ -33,7 +33,7 @@
   <img alt="Frontend" src=".github/aircnc.png" width="100%">
 </p>
 
-## :rocket: Tecnologias
+## :rocket: Tecnologies
 
 This project was developed with the following technologies
 
@@ -52,10 +52,10 @@ This APP was created to make easy to access your Rainbow Six Siege account stats
 
 Depois que o merge da sua pull request for feito, você pode deletar a sua branch.
 
-## :memo: Licença
+## :memo: License
 
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+This project is under MIT license. See the file [LICENSE](LICENSE) for more details.
 
 ---
 
-[Visite meu site!](https://www.ggportfolio.com.br)
+[Visit my website!](https://www.ggportfolio.com.br)
