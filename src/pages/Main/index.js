@@ -16,12 +16,15 @@ Icon.loadFont();
 import HeaderStats from '../../components/HeaderStats';
 import RankStats from '../../components/RankStats';
 import MatchStats from '../../components/MatchStats';
+import ModeStats from '../../components/ModeStats';
 
 import Background from '../../assets/main-background.jpg'; 
 import Logo from '../../assets/r6.png';
 
 export default function Main({ navigation }) {
-  
+    
+
+  const userData = navigation.getParam('response');
   const [loggedUserData, setLoggedUserData] = useState([]);
   const [shimmerVisible, setShimmerVisible] = useState(false);
 
@@ -37,18 +40,20 @@ export default function Main({ navigation }) {
           method: 'GET'
       })
       .then((response) => response.json())
-      .then((responseJson) => {          
-          
-          setLoggedUserData(responseJson);               
-          
+      .then(async (responseJson) => {          
+                            
+        setLoggedUserData(responseJson);                       
       })
       .catch((error) => {
           console.log(error);
       });   
-      
-      setShimmerVisible(true);      
+
+      setShimmerVisible(true);             
     }           
+
     handleStats();
+
+    //console.log(userData);
    
   }, []);
 
@@ -71,12 +76,13 @@ export default function Main({ navigation }) {
 
         <HeaderStats stats={loggedUserData} shimmer={shimmerVisible} />
 
-        {/* <RankStats stats={loggedUserData} /> */}
+        <RankStats />
 
-        <MatchStats stats={loggedUserData.data} matchType="Casual" />
-        <MatchStats stats={loggedUserData.data} matchType="Ranked" />
-        <MatchStats stats={loggedUserData.data} matchType="Terrorist Hunt" />
-        <MatchStats stats={loggedUserData.data} matchType="Casual" />
+        <MatchStats stats={userData} matchType="Casual" />
+        <MatchStats stats={userData} matchType="Ranked" />
+        {/* <MatchStats stats={userData} matchType="Terrorist Hunt" /> */}
+
+        <ModeStats />
         
         </BackgroundContainer>
       </Container>

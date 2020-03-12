@@ -26,6 +26,11 @@ export default function HeaderStats({ stats, shimmer }) {
     'psn': require('../../assets/platforms/psn_logo.png')
   }
 
+  // useEffect(() => {
+  //   console.log('header stats:');
+  //   console.log(stats.p_name);
+  // }, []);
+
   return (
       <HeaderView>        
 

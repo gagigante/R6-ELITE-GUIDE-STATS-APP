@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text  } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import { 
     Container,
@@ -12,52 +13,47 @@ import {
     StatProgressbar
 } from './styles';
 
-export default function MatchStats({ stats, matchType }) {
+export default function MatchStats({ stats, matchType }) {    
 
-    const userData = stats;
-
+    var userData = stats;
+    
     const [matchData, setMatchData] = useState([0,0,0,0,0]);
     
-    useEffect(() => {
-        function handleSetArrayIndex() {
-            //console.log('entrou');
-            //console.log(stats);
-
-            // if(matchType === "Casual"){
-            //     console.log('casual');
-            //     //setMatchData([stats.data[5], stats.data[6], stats.data[7], stats.data[8], stats.data[9]]);
-            // }
-            // if(matchType === "Ranked"){            
-            //     console.log('ranked');
-            // }
-            // if(matchType === "Terrorist Hunt"){
-            //     console.log('terrrorist');
-            // }
-            console.log(stats);
-            
-        }
     
-        handleSetArrayIndex();
+    // useEffect(() => {
+    //     console.log(userData);
+    // }, []);
+
+    useEffect(() => {                          
+        function handleSetArrayIndex() {  
+            if(matchType === "Casual"){                
+                setMatchData([userData.data[5], userData.data[6], userData.data[7], userData.data[8], userData.data[9]]);
+            }
+            if(matchType === "Ranked"){     
+                setMatchData([userData.data[0], userData.data[1], userData.data[2], userData.data[3], userData.data[4]]);                       
+            }            
+        }    
+        handleSetArrayIndex();     
     }, []);
     
 
   return (
     <Container>
         <ModeText>{matchType}</ModeText>
-        {/* <StatsView>
+        <StatsView>
             <GroupView>
                 <StatLabel>Kills</StatLabel>
-                <StatValue>{stats[1]}</StatValue>                
+                <StatValue>{matchData[1]}</StatValue>                
             </GroupView>
             <GroupView>
                 <StatLabel>Deaths</StatLabel>
-                <StatValue>{stats[2]}</StatValue>
+                <StatValue>{matchData[2]}</StatValue>
             </GroupView>
             <GroupView>
-                <StatLabel>Hours Player</StatLabel>
-                <StatValue>{Math.round((stats[0]/3600))}</StatValue>
+                <StatLabel>Hours Played</StatLabel>
+                <StatValue>{Math.round((matchData[0]/3600))}</StatValue>
             </GroupView>
-        </StatsView> */}
+        </StatsView>
         
         <StatText>Casual KD 1.21</StatText>
         <StatProgressbar
@@ -70,26 +66,25 @@ export default function MatchStats({ stats, matchType }) {
         <StatsView>
             <GroupView>
                 <StatLabel>Wins</StatLabel>
-                <StatValue>725</StatValue>
+                <StatValue>{matchData[3]}</StatValue>
             </GroupView>
             <GroupView>
                 <StatLabel>Losses</StatLabel>
-                <StatValue>623</StatValue>
+                <StatValue>{matchData[4]}</StatValue>
             </GroupView>
             <GroupView>
                 <StatLabel>Matches</StatLabel>
-                <StatValue>1348</StatValue>
+                <StatValue>{matchData[3] + matchData[4]}</StatValue>
             </GroupView>
         </StatsView>
         
-        <StatText>Winrate 53,78%</StatText>
+        <StatText>Winrate {Math.round(matchData[3] / (matchData[3] + matchData[4]) * 1000) / 10}%</StatText>
         <StatProgressbar
-                styleAttr="Horizontal"
-                color="#fff"
-                indeterminate={false}
-                progress={0.5}
+            styleAttr="Horizontal"
+            color="#fff"
+            indeterminate={false}
+            progress={0.5}
         />
-
     </Container>
   );
 }
