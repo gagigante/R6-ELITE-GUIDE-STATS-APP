@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {ToastAndroid, ActivityIndicator} from 'react-native';
 
-import AsyncStorage from '@react-native-community/async-storage';
+import api from '../../services/api';
 
 import {
   Container,
@@ -24,32 +24,22 @@ export default function Login({navigation}) {
   const [activityColor, setAcativityColor] = useState('transparent');
   const [buttonTextColor, setButtonTextColor] = useState('white');
 
-  // useEffect(() => {
-  //     AsyncStorage.getItem('userId').then(user_id => {
-  //       if(user_id) {
-  //         navigation.navigate('Main');
-  //       }
-  //     })
-  // }, []);
-
-  function handleSubmit(userName, userPlatform) {
+  async function handleSubmit(userName, userPlatform) {
     if (userName !== '') {
       setAcativityColor('white');
       setButtonTextColor('transparent');
 
-      let url = `https://r6tab.com/api/search.php?platform=${userPlatform}&search=${userName}`;
-
-      fetch(url, {method: 'GET'})
-        .then(response => response.json())
-        .then(async responseJson => {
-          const {totalresults} = responseJson;
+      await api
+        .get(`/search.php?platform=${userPlatform}&search=${userName}`)
+        .then(function(response) {
+          const {totalresults} = response.data;
 
           if (totalresults > 0) {
             setAcativityColor('transparent');
             setButtonTextColor('white');
 
             navigation.navigate('LoginResults', {
-              response: responseJson.results,
+              response: response.data.results,
             });
           } else {
             ToastAndroid.show('Usuário não encontrado', ToastAndroid.SHORT);
@@ -57,9 +47,6 @@ export default function Login({navigation}) {
             setAcativityColor('transparent');
             setButtonTextColor('white');
           }
-        })
-        .catch(error => {
-          console.error(error);
         });
     } else {
       ToastAndroid.show('Preencha os campos!', ToastAndroid.SHORT);
